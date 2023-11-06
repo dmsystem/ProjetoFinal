@@ -1,0 +1,60 @@
+-- Criar o banco de dados
+CREATE DATABASE site_venda_comida;
+
+-- Usar o banco de dados
+USE site_venda_comida;
+
+-- Tabela Cliente
+CREATE TABLE Cliente (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Nome VARCHAR(255),
+    Endereco VARCHAR(255),
+    Telefone VARCHAR(15),
+    Email VARCHAR(255)
+);
+
+-- Tabela Restaurante
+CREATE TABLE Restaurante (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Nome VARCHAR(255),
+    Endereco VARCHAR(255),
+    Especialidades VARCHAR(255),
+    HorarioFuncionamento VARCHAR(100)
+);
+
+-- Tabela Pedido
+CREATE TABLE Pedido (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    DataHoraPedido DATETIME,
+    Status ENUM('Pendente', 'EmPreparo', 'Entregue'),
+    TotalPedido DECIMAL(10, 2),
+    ClienteID INT,
+    RestauranteID INT,
+    FOREIGN KEY (ClienteID) REFERENCES Cliente(ID),
+    FOREIGN KEY (RestauranteID) REFERENCES Restaurante(ID)
+);
+
+-- Tabela ItemDeMenu
+CREATE TABLE ItemDeMenu (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Nome VARCHAR(255),
+    Descricao TEXT,
+    Preco DECIMAL(10, 2),
+    RestauranteID INT,
+    CategoriaID INT
+);
+
+-- Tabela CategoriaDeMenu
+CREATE TABLE CategoriaDeMenu (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Nome VARCHAR(255)
+);
+
+-- Tabela de Associação para Itens de Menu e Categorias de Menu (Relação N:N)
+CREATE TABLE ItemDeMenu_CategoriaDeMenu (
+    ItemDeMenuID INT,
+    CategoriaDeMenuID INT,
+    PRIMARY KEY (ItemDeMenuID, CategoriaDeMenuID),
+    FOREIGN KEY (ItemDeMenuID) REFERENCES ItemDeMenu(ID),
+    FOREIGN KEY (CategoriaDeMenuID) REFERENCES CategoriaDeMenu(ID)
+);
