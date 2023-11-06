@@ -1,0 +1,30 @@
+   a) Cliente:
+      - ID (Chave Primária)
+      - Nome
+      - Endereço
+      - Número de telefone
+      - E-mail
+
+   b) Restaurante:
+      - ID (Chave Primária)
+      - Nome
+      - Endereço
+      - Especialidades
+      - Horário de funcionamento
+
+   c) Pedido:
+      - ID (Chave Primária)
+      - Data e hora do pedido
+      - Status (por exemplo, pendente, em preparo, entregue)
+      - Total do pedido
+
+   d) Item de Menu:
+      - ID (Chave Primária)
+      - Nome
+      - Descrição
+      - Preço
+
+   e) Categoria de Menu:
+      - ID (Chave Primária)
+      - Nome
+
