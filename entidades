@@ -27,4 +27,11 @@
    e) Categoria de Menu:
       - ID (Chave Primária)
       - Nome
+  f) Item do Pedido:
+      ID (PK)        
+      PedidoID (FK)      
+      ItemDeMenuID (FK)  
+      Quantidade         
+      ValorUnitario      
+      Subtotal     
 
