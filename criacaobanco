@@ -12,7 +12,6 @@ CREATE TABLE Cliente (
     Telefone VARCHAR(15),
     Email VARCHAR(255)
 );
-
 -- Tabela Restaurante
 CREATE TABLE Restaurante (
     ID SERIAL PRIMARY KEY,
@@ -21,17 +20,27 @@ CREATE TABLE Restaurante (
     Especialidades VARCHAR(255),
     HorarioFuncionamento VARCHAR(100)
 );
-
+CREATE TYPE StatusPedido AS ENUM ('Pendente', 'EmPreparo', 'Entregue');
 -- Tabela Pedido
 CREATE TABLE Pedido (
     ID SERIAL PRIMARY KEY,
-    DataHoraPedido DATETIME,
-    Status ENUM('Pendente', 'EmPreparo', 'Entregue'),
+    DataHoraPedido DATE,
+    Status StatusPedido,
     TotalPedido DECIMAL(10, 2),
     ClienteID INT,
     RestauranteID INT,
     FOREIGN KEY (ClienteID) REFERENCES Cliente(ID),
     FOREIGN KEY (RestauranteID) REFERENCES Restaurante(ID)
+);
+
+-- Tabela ItemDeMenu
+CREATE TABLE ItemDeMenu (
+    ID SERIAL PRIMARY KEY,
+    Nome VARCHAR(255),
+    Descricao TEXT,
+    Preco DECIMAL(10, 2),
+    RestauranteID INT,
+    CategoriaID INT
 );
 
 CREATE TABLE ItemDePedido (
@@ -45,15 +54,7 @@ CREATE TABLE ItemDePedido (
     FOREIGN KEY (ItemDeMenuID) REFERENCES ItemDeMenu(ID)
 );
 
--- Tabela ItemDeMenu
-CREATE TABLE ItemDeMenu (
-    ID SERIAL PRIMARY KEY,
-    Nome VARCHAR(255),
-    Descricao TEXT,
-    Preco DECIMAL(10, 2),
-    RestauranteID INT,
-    CategoriaID INT
-);
+
 
 -- Tabela CategoriaDeMenu
 CREATE TABLE CategoriaDeMenu (
