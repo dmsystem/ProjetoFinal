@@ -6,7 +6,7 @@ USE site_venda_comida;
 
 -- Tabela Cliente
 CREATE TABLE Cliente (
-    ID INT AUTO_INCREMENT PRIMARY KEY,
+    ID SERIAL PRIMARY KEY,
     Nome VARCHAR(255),
     Endereco VARCHAR(255),
     Telefone VARCHAR(15),
@@ -15,7 +15,7 @@ CREATE TABLE Cliente (
 
 -- Tabela Restaurante
 CREATE TABLE Restaurante (
-    ID INT AUTO_INCREMENT PRIMARY KEY,
+    ID SERIAL PRIMARY KEY,
     Nome VARCHAR(255),
     Endereco VARCHAR(255),
     Especialidades VARCHAR(255),
@@ -24,7 +24,7 @@ CREATE TABLE Restaurante (
 
 -- Tabela Pedido
 CREATE TABLE Pedido (
-    ID INT AUTO_INCREMENT PRIMARY KEY,
+    ID SERIAL PRIMARY KEY,
     DataHoraPedido DATETIME,
     Status ENUM('Pendente', 'EmPreparo', 'Entregue'),
     TotalPedido DECIMAL(10, 2),
@@ -35,7 +35,7 @@ CREATE TABLE Pedido (
 );
 
 CREATE TABLE ItemDePedido (
-    ID INT AUTO_INCREMENT PRIMARY KEY,
+    ID SERIAL PRIMARY KEY,
     PedidoID INT,
     ItemDeMenuID INT,
     Quantidade INT,  -- Quantidade de unidades desse item no pedido
@@ -47,7 +47,7 @@ CREATE TABLE ItemDePedido (
 
 -- Tabela ItemDeMenu
 CREATE TABLE ItemDeMenu (
-    ID INT AUTO_INCREMENT PRIMARY KEY,
+    ID SERIAL PRIMARY KEY,
     Nome VARCHAR(255),
     Descricao TEXT,
     Preco DECIMAL(10, 2),
@@ -57,7 +57,7 @@ CREATE TABLE ItemDeMenu (
 
 -- Tabela CategoriaDeMenu
 CREATE TABLE CategoriaDeMenu (
-    ID INT AUTO_INCREMENT PRIMARY KEY,
+    ID SERIAL PRIMARY KEY,
     Nome VARCHAR(255)
 );
 
