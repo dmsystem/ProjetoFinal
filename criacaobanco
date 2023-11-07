@@ -69,3 +69,12 @@ CREATE TABLE ItemDeMenu_CategoriaDeMenu (
     FOREIGN KEY (ItemDeMenuID) REFERENCES ItemDeMenu(ID),
     FOREIGN KEY (CategoriaDeMenuID) REFERENCES CategoriaDeMenu(ID)
 );
+
+
+CREATE OR REPLACE FUNCTION CalcularSubtotal(quantidade INT, valor_unitario DECIMAL(10, 2))
+RETURNS DECIMAL(10, 2) AS $$
+BEGIN
+    RETURN quantidade * valor_unitario;
+END;
+$$ LANGUAGE plpgsql;
+
