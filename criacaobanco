@@ -34,6 +34,17 @@ CREATE TABLE Pedido (
     FOREIGN KEY (RestauranteID) REFERENCES Restaurante(ID)
 );
 
+CREATE TABLE ItemDePedido (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    PedidoID INT,
+    ItemDeMenuID INT,
+    Quantidade INT,  -- Quantidade de unidades desse item no pedido
+    ValorUnitario DECIMAL(10, 2),  -- Valor unitário do item no pedido
+    Subtotal DECIMAL(10, 2),  -- Subtotal para esse item no pedido
+    FOREIGN KEY (PedidoID) REFERENCES Pedido(ID),
+    FOREIGN KEY (ItemDeMenuID) REFERENCES ItemDeMenu(ID)
+);
+
 -- Tabela ItemDeMenu
 CREATE TABLE ItemDeMenu (
     ID INT AUTO_INCREMENT PRIMARY KEY,
