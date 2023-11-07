@@ -10,13 +10,32 @@ VALUES ('Restaurante A', 'Avenida Principal, 456', 'Pizza, Massas', 'Seg-Sáb 11
 INSERT INTO CategoriaDeMenu (Nome)
 VALUES ('Pizza'), ('Massas'), ('Sobremesas');
 
--- Inserir dados de ItemDeMenu
-INSERT INTO ItemDeMenu (Nome, Descricao, Preco, RestauranteID, CategoriaID)
+-- Inserir itens de menu de exemplo
+INSERT INTO ItemDeMenu (Nome, Descricao, Preco, QuantidadeDisponivel, RestauranteID, CategoriaID)
 VALUES
-    ('Pizza Margherita', 'Molho de tomate, queijo e manjericão', 20.00, 1, 1),
-    ('Lasanha Bolonhesa', 'Massa de lasanha com molho bolonhesa', 18.50, 1, 2),
-    ('Tiramisu', 'Sobremesa italiana com café e queijo mascarpone', 8.00, 1, 3);
+    ('Hamburguer Clássico', 'Um delicioso hambúrguer clássico', 10.00, 50, 2, 1),
+    ('Hamburguer Vegetariano', 'Hamburguer vegetariano com cogumelos', 12.00, 30, 2, 1),
+    ('Batatas Fritas Pequenas', 'Porção pequena de batatas fritas', 5.00, 100, 2, 2),
+    ('Batatas Fritas Grandes', 'Porção grande de batatas fritas', 7.00, 80, 2, 2);
 
--- Inserir dados de Pedido
+
+-- Inserir um pedido de exemplo
 INSERT INTO Pedido (DataHoraPedido, Status, TotalPedido, ClienteID, RestauranteID)
-VALUES (NOW(), 'Pendente', 38.50, 1, 1);
+VALUES (NOW(), 'Pendente', 22.00, 1, 2);
+
+-- Inserir itens de pedido para o pedido de exemplo
+-- Primeiro item: 2 hamburgueres clássicos
+INSERT INTO ItemDePedido (PedidoID, ItemDeMenuID, Quantidade, ValorUnitario, Subtotal)
+VALUES (1, 1, 2, 10.00,CalcularSubtotal(2, 10.00));
+
+-- Segundo item: 1 porção grande de batatas fritas
+INSERT INTO ItemDePedido (PedidoID, ItemDeMenuID, Quantidade, ValorUnitario, Subtotal)
+VALUES (1, 4, 1, 7.00, CalcularSubtotal(1, 7.00));
+
+CREATE OR REPLACE FUNCTION CalcularSubtotal(quantidade INT, valor_unitario DECIMAL(10, 2))
+RETURNS DECIMAL(10, 2) AS $$
+BEGIN
+    RETURN quantidade * valor_unitario;
+END;
+$$ LANGUAGE plpgsql;
+
