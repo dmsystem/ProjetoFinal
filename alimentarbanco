@@ -32,10 +32,4 @@ VALUES (1, 1, 2, 10.00,CalcularSubtotal(2, 10.00));
 INSERT INTO ItemDePedido (PedidoID, ItemDeMenuID, Quantidade, ValorUnitario, Subtotal)
 VALUES (1, 4, 1, 7.00, CalcularSubtotal(1, 7.00));
 
-CREATE OR REPLACE FUNCTION CalcularSubtotal(quantidade INT, valor_unitario DECIMAL(10, 2))
-RETURNS DECIMAL(10, 2) AS $$
-BEGIN
-    RETURN quantidade * valor_unitario;
-END;
-$$ LANGUAGE plpgsql;
 
